@@ -16,7 +16,7 @@ module.exports = (io, socket, games) => {
             return;
         }
 
-        games[data.room_code].in_progress = true;
+        games[data.room_code].room_locked = true;
 
         // Game set to in progress, send all players to actual game page!
         io.to(data.room_code).emit("room:start", {

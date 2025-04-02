@@ -29,6 +29,18 @@ module.exports = (socket, games) => {
             games[data.room_code].players[socket.id].ready = true;
         }
 
+        // If all sockets are ready, set the game in motion!
+        let everyone_ready = true;
+        for(const player in games[data.room_code].players){
+            if(!(games[data.room_code].players[player].ready)){
+                everyone_ready = false;
+            }
+        }
+
+        if(everyone_ready){
+            games[data.room_code].in_progress = true;
+        }
+
         socket.emit("game:validate_session", {
             success: 1,
             board: games[data.room_code].players[socket.id].board

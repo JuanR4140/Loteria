@@ -31,6 +31,7 @@ module.exports = (socket, games) => {
         let b = board.slice(0, 16);
 
         games[room_code] = {
+            room_locked: false,
             in_progress: false,
             host: socket.id,
             deck: deck,

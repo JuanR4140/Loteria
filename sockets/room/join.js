@@ -18,7 +18,7 @@ module.exports = (socket, games) => {
             return;
         }
 
-        if(games[data.room_code].in_progress){
+        if(games[data.room_code].room_locked){
             socket.emit("room:join", {
                 success: 0,
                 message: "Can't join room. Game in progress!"

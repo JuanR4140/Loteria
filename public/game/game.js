@@ -24,5 +24,11 @@ socket.on("game:validate_session", (data) => {
     localStorage.setItem("socket_id", socket.id);
 
     alert("Game will now start!");
+
+    console.log(data.board);
+    for(let i = 0; i < data.board.length; i++){
+        document.querySelector(`#board-${i}`).src = `assets/images/${data.board[i]}.jpg`;
+    }
+
 });
 
