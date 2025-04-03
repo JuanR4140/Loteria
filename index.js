@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
     require("./sockets/room/leave.js")(socket, games);
     require("./sockets/room/start.js")(io, socket, games);
 
-    require("./sockets/game/validate_session.js")(socket, games);
+    require("./sockets/game/validate_session.js")(io, socket, games);
 });
 
 const { registerRoutes } = require("./routes/routes.js");

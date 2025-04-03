@@ -9,6 +9,8 @@ console.log(socket.user_id);
 console.log(localStorage.getItem("socket_id"));
 console.log(`The old id is ${socket.user_id} and the new one is ${socket.id}`);
 
+let revealed_deck = [];
+
 socket.emit("game:validate_session", {
     old_id: socket.user_id,
     room_code: room_code
@@ -30,5 +32,11 @@ socket.on("game:validate_session", (data) => {
         document.querySelector(`#board-${i}`).src = `assets/images/${data.board[i]}.jpg`;
     }
 
+});
+
+
+socket.on("game:new_card", (data) => {
+    revealed_deck = data.deck;
+    console.log(revealed_deck);
 });
 

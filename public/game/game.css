@@ -13,3 +13,10 @@
     height: 9rem;
 }
 
+#loteria-btn {
+    font-size: 1.5rem;
+    padding: 15px;
+    background-color: yellow;
+    border: 2px solid black;
+    cursor: pointer;
+}

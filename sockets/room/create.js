@@ -35,6 +35,7 @@ module.exports = (socket, games) => {
             in_progress: false,
             host: socket.id,
             deck: deck,
+            revealed_deck: [],
             players: {}
         }
 
