@@ -45,7 +45,7 @@ module.exports = (io, socket, games) => {
             board: games[data.room_code].players[socket.id].board
         });
 
-        if(everyone_ready){
+        if(everyone_ready && games[data.room_code].in_progress != true){
             console.log(`Ok. Everyone ready. game start.`);
             games[data.room_code].in_progress = true;
             console.log(process.cwd())

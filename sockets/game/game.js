@@ -12,7 +12,7 @@ let drawCard = (io, games, room_code) => {
         deck: games[room_code].revealed_deck
     });
 
-    game.timer = setTimeout(() => drawCard(io, games, room_code), 5000);
+    game.timer = setTimeout(() => drawCard(io, games, room_code), 8000);
 }
 
 module.exports = (io, socket, games, room_code) => {

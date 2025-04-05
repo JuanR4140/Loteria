@@ -1,7 +1,8 @@
 let socket = io.connect();
 console.log("sock inited");
-// Stored on every new connection on the index page
-// Retrieved and used at the start of the game to match the server's ids.
+
+// clean all local storage info. (server deck, chosen board pieces, etc)
+localStorage.clear();
 
 document.querySelector("#create-room-btn").addEventListener("click", () => {
     console.log("sent sock create request");
