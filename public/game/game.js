@@ -48,6 +48,22 @@ if(!(localStorage.getItem("revealed_deck") === null)){
     revealed_deck = JSON.parse(localStorage.getItem("revealed_deck"));
 }
 
+document.querySelector("#buenas-btn").addEventListener("click", () => {
+    let beans = placed_beans.map(Number);
+    let board_state = new Array(16).fill(0);
+
+    beans.forEach((bean) => {
+        if(bean >= 0 && bean <= 15){
+            board_state[bean] = 1;
+        }
+    });
+
+    socket.emit("game:check_win", {
+        room_code: room_code,
+        board_state: board_state
+    });
+});
+
 socket.emit("game:validate_session", {
     old_id: socket.user_id,
     room_code: room_code
@@ -80,6 +96,9 @@ socket.on("game:validate_session", (data) => {
                 placed_beans.push(child.id.split("-")[1]);
                 localStorage.setItem("placed_beans", JSON.stringify(placed_beans));
 
+                console.log(placed_beans);
+                console.log(chosen_cards);
+
                 let bean = document.createElement("img");
                 bean.src = "assets/images/bean.png";
                 bean.style.transform = `rotate(${Math.floor(Math.random() * 360) + 1}deg)`;
@@ -104,6 +123,11 @@ socket.on("game:validate_session", (data) => {
 
 
 socket.on("game:new_card", (data) => {
+
+    socket.emit("game:ping", {
+        room_code: room_code
+    });
+
     revealed_deck = data.deck;
     localStorage.setItem("revealed_deck", JSON.stringify(revealed_deck));
     console.log(revealed_deck);
@@ -130,3 +154,7 @@ socket.on("game:new_card", (data) => {
     announcement_card.style.top = `${r.top + window.scrollY}px`;
 });
 
+socket.on("game:check_win", (winner) => {
+    alert(`Buenas! ${winner} won the game!`);
+    window.location.href = "/";
+});

@@ -33,6 +33,7 @@ module.exports = (socket, games) => {
         games[room_code] = {
             room_locked: false,
             in_progress: false,
+            any_reply: true,
             host: socket.id,
             deck: deck,
             revealed_deck: [],
