@@ -1,3 +1,4 @@
+let sanitizer = require("sanitizer");
 
 let shuffleCards = (deck) => {
     for(let i = deck.length - 1; i > 0; i--){
@@ -24,6 +25,15 @@ module.exports = (socket, games) => {
                 message: "Can't join room. Game in progress!"
             });
             return;
+        }
+
+        data.display_name = sanitizer.sanitize(data.display_name);
+
+        if(data.display_name.length > 25){
+            socket.emit("room:join", {
+                success: 0,
+                message: "Display name can't be longer than 25 characters!"
+            });
         }
 
         let name_taken = false;

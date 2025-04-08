@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+let sanitizer = require("sanitizer");
 
 let generateToken = (length) => {
     return crypto.randomBytes(length).toString("hex").toUpperCase();
@@ -38,6 +39,15 @@ module.exports = (socket, games) => {
             deck: deck,
             revealed_deck: [],
             players: {}
+        }
+
+        data.display_name = sanitizer.sanitize(data.display_name);
+
+        if(data.display_name.length > 25){
+            socket.emit("room:join", {
+                success: 0,
+                message: "Display name can't be longer than 25 characters!"
+            });
         }
 
         games[room_code].players[socket.id] = {
