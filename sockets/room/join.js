@@ -28,7 +28,7 @@ module.exports = (socket, games) => {
 
         let name_taken = false;
         for(const key in games[data.room_code].players){
-            const value = games[data.room_code].players[key];
+            const value = games[data.room_code].players[key].display_name;
             if(value == data.display_name){
                 name_taken = true;
                 socket.emit("room:join", {
