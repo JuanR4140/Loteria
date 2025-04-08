@@ -140,6 +140,25 @@ socket.on("game:new_card", (data) => {
     let width_calc = (r.width * 4) + (5 * 4);
     let height_calc = (r.height * 4) + (5 * 4);
 
+    let new_card = new Image();
+    new_card.src = `assets/images/${revealed_deck[revealed_deck.length - 1]}.jpg`;
+
+    new_card.onload = () => {
+        announcement_card.src = new_card.src;
+        announcement_card.classList.add("announcement-card-anim");
+
+        setTimeout(() => {
+            announcement_card.classList.remove("announcement-card-anim");
+        }, 3000);
+
+        announcement_card.style.width = `${width_calc}px`;
+        announcement_card.style.height = `${height_calc}px`;
+
+        announcement_card.style.left = `${r.left + window.scrollX}px`;
+        announcement_card.style.top = `${r.top + window.scrollY}px`;
+    }
+
+    /*
     announcement_card.classList.add("announcement-card-anim");
     
     setTimeout(() => {
@@ -152,6 +171,7 @@ socket.on("game:new_card", (data) => {
     announcement_card.src = `assets/images/${revealed_deck[revealed_deck.length - 1]}.jpg`;
     announcement_card.style.left = `${r.left + window.scrollX}px`;
     announcement_card.style.top = `${r.top + window.scrollY}px`;
+    */
 });
 
 socket.on("game:check_win", (winner) => {
