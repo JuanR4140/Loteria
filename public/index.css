@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body{
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    background-color: #fbb03b;
+    color: black;
+}
+
+input[type=text]{
+    padding: 0.7rem;
+    font-size: 20px;
+    border: 2px solid black;
+    border-radius: 6px;
+    color: black;
+}
+
+::placeholder{
+}
+
+input[type=button]{
+    padding: 0.7rem;
+    border: 2px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+    color: black;
+}
+
